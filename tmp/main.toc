@@ -1,4 +1,0 @@
-\select@language {french}
-\contentsline {section}{\numberline {1}Q2}{2}{section.1}
-\contentsline {section}{\numberline {2}Q3}{2}{section.2}
-\contentsline {section}{\numberline {3}Q5}{2}{section.3}

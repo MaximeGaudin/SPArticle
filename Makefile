@@ -8,6 +8,11 @@ OUTPUT=main.pdf
 
 all: $(BINPATH)/$(OUTPUT)
 
+checkpath:
+	@mkdir tmp
+	@mkdir bin
+
+
 $(BINPATH)/$(OUTPUT): $(DOCPATH)/$(SOURCE) $(SOURCEDEPS)
 # Processing twice to handle references inside the document
 	cd $(DOCPATH) ; \

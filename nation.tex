@@ -12,6 +12,14 @@
 \usepackage[top=20mm, bottom=20mm, left=25mm, right=25mm]{geometry}
 \pagestyle{fancy}
 
+\newcommand{\nHeader}[3]
+{
+	\title{\textbf{#1}}
+	\author{#2}
+	\lhead{#3}
+	\cfoot{\thepage\ of \pageref{LastPage}}
+}
+
 \newcommand{\nTitle}[1]
 {
 	\newpage			

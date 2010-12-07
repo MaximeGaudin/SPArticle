@@ -14,7 +14,7 @@
 	\cfoot{\thepage\ of \pageref{LastPage}}
 }
 
-\newcommand{\nTitle}[1]
+\newcommand{\nPart}[1]
 {
 	\newpage			
 	\begin{nVCenter}
@@ -69,5 +69,12 @@
 {
 	\begin{nVCenter}
 	\bibliography{references}
+	\end{nVCenter}
+}
+
+\newcommand{\nIndex}[0] 
+{
+	\begin{nVCenter}
+	\printindex
 	\end{nVCenter}
 }

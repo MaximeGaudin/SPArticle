@@ -17,5 +17,5 @@ buildRes = env.PDF(target = tmpPath + texName + ".pdf", source = srcPath + texNa
 if os.path.exists(tmpPath + texName + ".idx"): env.AddPreAction(buildRes, "makeindex " + tmpPath + texName + ".idx")
 
 env.AddPostAction(buildRes, "cp " + tmpPath + texName + ".pdf " +  binPath + outputName + ".pdf") 
-env.AddPostAction(buildRes, "open " + tmpPath + outputName + ".pdf")
+env.AddPostAction(buildRes, "open " + binPath + outputName + ".pdf")
 

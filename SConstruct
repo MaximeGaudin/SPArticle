@@ -4,7 +4,7 @@ import SCons
 
 env = Environment(ENV=os.environ)
 
-outputName = "Nation"
+outputName = "MAIN"
 
 texName = "main"
 binPath = "bin/"

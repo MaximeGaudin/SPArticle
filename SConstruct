@@ -13,9 +13,12 @@ tmpPath = "tmp/"
 
 buildRes = env.PDF(target = tmpPath + texName + ".pdf", source = srcPath + texName + ".tex") 
 
+env.AddPreAction(buildRes, "@echo '\\n**** Compiling " + srcPath + texName + ".tex ... ****\\n'" ); 
+
 # Construction de l'index
 if os.path.exists(tmpPath + texName + ".idx"): env.AddPreAction(buildRes, "makeindex " + tmpPath + texName + ".idx")
 
-env.AddPostAction(buildRes, "cp " + tmpPath + texName + ".pdf " +  binPath + outputName + ".pdf") 
-env.AddPostAction(buildRes, "open " + binPath + outputName + ".pdf")
+#env.AddPostAction(buildRes, "@echo '\n**** Build succesfull ****\n'" ); 
+env.AddPostAction(buildRes, "@cp " + tmpPath + texName + ".pdf " +  binPath + outputName + ".pdf") 
+env.AddPostAction(buildRes, "@open " + binPath + outputName + ".pdf")
 

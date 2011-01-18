@@ -1,3 +1,6 @@
+\newlength{\parindentCopy}
+\setlength{\parindentCopy}{\parindent}
+
 \newenvironment{nVCenter}
 {
 	\vspace*{\fill}
@@ -51,7 +54,6 @@
 
 \newenvironment{nNoIndent}
 {
-	\newlength{\parindentCopy}{\parindent}
 	\setlength{\parindent}{0pt}
 }
 {

@@ -38,7 +38,7 @@
 
 }
 
-\newcommand{\nNoIndent}[0]
+\newcommand{\nUnindent}[0]
 {
 	\hspace*{-1.2\parindent}
 }
@@ -47,6 +47,15 @@
 {
 	~\\
 	\hspace*{0.8\parindent}
+}
+
+\newenvironment{nNoIndent}
+{
+	\newlength{\parindentCopy}{\parindent}
+	\setlength{\parindent}{0pt}
+}
+{
+	\setlength{\parindent}{\parindentCopy}
 }
 
 \newenvironment{nAbstract}		

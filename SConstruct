@@ -14,6 +14,8 @@ tmpPath = "tmp/"
 buildRes = env.PDF(target = tmpPath + texName + ".pdf", source = srcPath + texName + ".tex") 
 
 env.AddPreAction(buildRes, "@echo '\\n**** Compiling " + srcPath + texName + ".tex ... ****\\n'" ); 
+env.AddPreAction(buildRes, "@echo '** Converting files ....' && Scripts/convertEncoding src LATIN1 UTF8")
+
 
 # Construction de l'index
 if os.path.exists(tmpPath + texName + ".idx"): env.AddPreAction(buildRes, "makeindex " + tmpPath + texName + ".idx")

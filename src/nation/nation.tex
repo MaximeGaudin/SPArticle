@@ -1,0 +1,114 @@
+\newlength{\parindentCopy}
+\setlength{\parindentCopy}{\parindent}
+
+\newenvironment{nVCenter}
+{
+	\vspace*{\fill}
+}
+{
+	\vspace*{\fill}
+}
+
+\newcommand{\nHeader}[2]
+{
+	\title{\textbf{#1}}
+	\author{Maxime \textsc{Gaudin}}
+
+	\lhead{#2}
+	\cfoot{\thepage\ / \pageref{LastPage}}
+}
+
+\newcommand{\nPart}[1]
+{
+	\newpage			
+	\begin{nVCenter}
+		\begin{center}	
+			\part{#1}		
+		\end{center}
+	\end{nVCenter}
+	\newpage
+
+	\setcounter{section}{1}
+}
+
+\newcommand{\nSection}[1]
+{
+	\section{#1}
+}
+
+\newcommand{\nInd}[0]
+{
+
+
+}
+
+\newcommand{\nUnindent}[0]
+{
+	\hspace*{-1.2\parindent}
+}
+
+\newcommand{\nPar}[0]
+{
+	~\\
+	\hspace*{0.8\parindent}
+}
+
+\newenvironment{nNoIndent}
+{
+	\setlength{\parindent}{0pt}
+}
+{
+	\setlength{\parindent}{\parindentCopy}
+}
+
+\newenvironment{nAbstract}		
+{								
+	\begin{nVCenter}
+		\begin{center}				
+			\begin{abstract}		
+}
+{
+			\end{abstract}			
+		\end{center}				
+	\end{nVCenter}
+}
+
+\newcommand{\nImage}[3] 
+{
+\begin{figure}[H]
+\centering
+	\includegraphics[keepaspectratio=true, width=#3\textwidth]{#1}
+	\caption{#2}
+\end{figure}
+}
+
+\newcommand{\nCode}[2]
+{
+	\paragraph{#1}~\\
+	\lstinputlisting{#2}
+}
+
+\newcommand{\nOg}[0]
+{
+	\rotatebox{-30}{\raisebox{0.7\baselineskip}{\og}}
+	
+}
+
+\newcommand{\nLettrine}[2]{ 
+	\renewcommand{\LettrineFontHook}{\color[gray]{0.5}}
+	\lettrine[lines=1]{#1}{#2}
+}
+
+\newcommand{\nBibliography}[0] 
+{
+	\begin{nVCenter}
+	\bibliography{references}
+	\end{nVCenter}
+}
+
+\newcommand{\nIndex}[0] 
+{
+	\begin{nVCenter}
+	\printindex
+	\end{nVCenter}
+}

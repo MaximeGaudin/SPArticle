@@ -1,8 +1,8 @@
 \usepackage{supertabular}
 
-\newlength{\colNumber}
-\setlength{\colNumber}{2}
+\newcounter{colNumber}
+\setcounter{colNumber}{2}
 
- \tablefirsthead{\hline \multicolumn{\colNumber}{|l|}{\bf Nom} & \multicolumn{1}{|l|}{\bf Nature} \\  \hline}
- \tabletail{\hline \multicolumn{\colNumber}{|l|}{\small\sl Suite du tableau à la page suivante}\\ \hline}
+ \tablefirsthead{\hline \multicolumn{\thecolNumber}{|l|}{\bf Nom} & \multicolumn{1}{|l|}{\bf Nature} \\  \hline}
+ \tabletail{\hline \multicolumn{\thecolNumber}{|l|}{\small\sl Suite du tableau à la page suivante}\\ \hline}
 

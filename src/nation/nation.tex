@@ -1,14 +1,7 @@
 \newlength{\parindentCopy}
 \setlength{\parindentCopy}{\parindent}
 
-\newenvironment{nVCenter}
-{
-	\vspace*{\fill}
-}
-{
-	\vspace*{\fill}
-}
-
+%%%% Commandes 
 \newcommand{\nHeader}[2]
 {
 	\title{\textbf{#1}}
@@ -18,6 +11,12 @@
 	\cfoot{\thepage\ / \pageref{LastPage}}
 }
 
+\newcommand{\nSignature}[1]
+{
+	\flushright{\small\sl #1}
+}
+
+%% Sectioning improvement
 \newcommand{\nPart}[1]
 {
 	\newpage			
@@ -36,6 +35,8 @@
 	\section{#1}
 }
 
+
+%% Indentation correction
 \newcommand{\nInd}[0]
 {
 
@@ -51,6 +52,15 @@
 {
 	~\\
 	\hspace*{0.8\parindent}
+}
+
+%%%% Environnements
+\newenvironment{nVCenter}
+{
+	\vspace*{\fill}
+}
+{
+	\vspace*{\fill}
 }
 
 \newenvironment{nNoIndent}
@@ -73,6 +83,7 @@
 	\end{nVCenter}
 }
 
+%% Extras
 \newcommand{\nImage}[3] 
 {
 \begin{figure}[H]
@@ -88,17 +99,12 @@
 	\lstinputlisting{#2}
 }
 
-\newcommand{\nOg}[0]
-{
-	\rotatebox{-30}{\raisebox{0.7\baselineskip}{\og}}
-	
-}
-
 \newcommand{\nLettrine}[2]{ 
 	\renewcommand{\LettrineFontHook}{\color[gray]{0.5}}
 	\lettrine[lines=1]{#1}{#2}
 }
 
+%% Extras like bibliography & Index
 \newcommand{\nBibliography}[0] 
 {
 	\begin{nVCenter}

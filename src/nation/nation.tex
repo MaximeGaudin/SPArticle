@@ -7,6 +7,7 @@
 \input{nation/customChapter}
 
 %%%% Commandes 
+
 \newcommand{\nHeader}[3][Maxime \textsc{Gaudin}]
 {
 	\title{\Huge\bf #2}
@@ -21,19 +22,6 @@
 	\flushright{\small\sl #1}
 }
 
-
-\newcommand{\nPart}[1]
-{
-	\newpage			
-	\begin{nVCenter}
-		\begin{center}	
-			\part{#1}		
-		\end{center}
-	\end{nVCenter}
-	\newpage
-
-	\setcounter{section}{1}
-}
 
 %% Indentation correction
 \newcommand{\nInd}[0]
@@ -82,13 +70,6 @@
 	\end{nVCenter}
 }
 
- % \newenvironment{nExample}
- % {
- % 
- % }
- % {
- % 
- % }
 
 %% Extras
 \newcommand{\nImage}[3] 

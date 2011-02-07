@@ -1,0 +1,41 @@
+\DeclareFixedFont{\chapnumfont}{T1}{phv}{bc}{n}{80}
+\DeclareFixedFont{\chapfont}{T1}{phv}{b}{n}{24.88pt}
+
+\newcounter{chapitre}
+\setcounter{chapitre}{1}
+
+\makeatletter
+\renewcommand{\chapter}{%
+	\cleardoublepage
+		\stepcounter{chapitre}
+	\thispagestyle{plain}
+	\global\@topnum\z@
+		\@afterindentfalse
+		\secdef\@chapter\@schapter}
+
+
+		\newenvironment{cadrechap}{\begin{list}{}{%
+			\setlength{\leftmargin}{0pt}%
+				\setlength{\rightmargin}{-2cm}%
+				\setlength{\itemindent}{0pt}%
+				\setlength{\labelsep}{0pt}%
+		}\item}{\end{list}}
+
+\renewcommand{\@makechapterhead}[1]{% 
+	\begin{cadrechap}
+	\if@mainmatter{\chapnumfont\thechapter}\else\mbox{}\fi
+		\hfill%
+		{\chapfont#1}%   % titre du chapitre
+	\end{cadrechap}%
+		\vspace{1cm}\par\ifx\minisommaire\undefined\else\minisommaire\fi
+}
+
+\renewcommand{\@makeschapterhead}[1]{%   
+	\begin{cadrechap}
+	\mbox{}\hfill{\chapfont#1}% titre du chapitre
+		\end{cadrechap}%
+		\vspace{2cm}\par
+}
+
+						\makeatother
+

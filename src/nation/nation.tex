@@ -1,13 +1,18 @@
 \newlength{\parindentCopy}
 \setlength{\parindentCopy}{\parindent}
 
-%%%% Commandes 
-\newcommand{\nHeader}[2]
-{
-	\title{\textbf{#1}}
-	\author{Maxime \textsc{Gaudin}}
+%% Sectioning improvement
+\input{nation/customPart}
+\input{nation/customSection}
+\input{nation/customChapter}
 
-	\lhead{#2}
+%%%% Commandes 
+\newcommand{\nHeader}[3][Maxime \textsc{Gaudin}]
+{
+	\title{\Huge\bf #2}
+	\author{#1}
+
+	\lhead{#3}
 	\cfoot{\thepage\ / \pageref{LastPage}}
 }
 
@@ -16,9 +21,6 @@
 	\flushright{\small\sl #1}
 }
 
-%% Sectioning improvement
-\input{nation/customSection}
-\input{nation/customChapter}
 
 \newcommand{\nPart}[1]
 {

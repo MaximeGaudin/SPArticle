@@ -11,6 +11,10 @@ binPath = "bin/"
 srcPath = "src/"
 tmpPath = "tmp/"
 
+if not os.path.exists(binPath): os.mkdir(binPath)
+if not os.path.exists(srcPath): os.mkdir(srcPath)
+if not os.path.exists(tmpPath): os.mkdir(tmpPath)
+
 buildRes = env.PDF(target = tmpPath + texName + ".pdf", source = srcPath + texName + ".tex") 
 
 env.AddPreAction(buildRes, "@echo '\\n**** Compiling " + srcPath + texName + ".tex ... ****\\n'" ); 

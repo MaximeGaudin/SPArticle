@@ -22,4 +22,3 @@ if os.path.exists(tmpPath + texName + ".idx"): env.AddPreAction(buildRes, "makei
 #env.AddPostAction(buildRes, "@echo '\n**** Build succesfull ****\n'" ); 
 env.AddPostAction(buildRes, "@cp " + tmpPath + texName + ".pdf " +  binPath + outputName + ".pdf") 
 env.AddPostAction(buildRes, "@open " + binPath + outputName + ".pdf")
-

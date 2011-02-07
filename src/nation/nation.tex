@@ -17,6 +17,9 @@
 }
 
 %% Sectioning improvement
+\input{nation/customSection}
+\input{nation/customChapter}
+
 \newcommand{\nPart}[1]
 {
 	\newpage			
@@ -29,12 +32,6 @@
 
 	\setcounter{section}{1}
 }
-
-\newcommand{\nSection}[1]
-{
-	\section{#1}
-}
-
 
 %% Indentation correction
 \newcommand{\nInd}[0]
@@ -82,6 +79,14 @@
 		\end{center}				
 	\end{nVCenter}
 }
+
+ % \newenvironment{nExample}
+ % {
+ % 
+ % }
+ % {
+ % 
+ % }
 
 %% Extras
 \newcommand{\nImage}[3] 

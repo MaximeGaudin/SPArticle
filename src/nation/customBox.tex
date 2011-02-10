@@ -1,0 +1,30 @@
+\newcommand{\linefill}[2][1]
+{
+	\leaders\hrule height #2\hskip 0pt plus #1fill\relax
+}
+
+\newsavebox{\titleboxcontent}
+\newlength{\titleboxwidth}
+\newlength{\titleboxheight}
+
+\newcommand{\titlebox}[2]
+{
+	\begin{lrbox}{\titleboxcontent}{\kern\fboxsep #2\kern\fboxsep}\end{lrbox}
+	\settowidth{\titleboxwidth}{\usebox{\titleboxcontent}}
+	\settoheight{\titleboxheight}{\usebox{\titleboxcontent}}
+	\addtolength{\titleboxheight}{2\fboxrule}
+	\addtolength{\titleboxheight}{2\fboxsep}
+
+	\parbox{\fboxrule}{\rule{\fboxrule}{\titleboxheight}}
+	\parbox{\titleboxwidth}{
+		\begin{flushleft}
+		\makebox[\titleboxwidth]
+		{
+			\linefill{\fboxrule}#1\linefill[5]{\fboxrule}
+			\usebox{\titleboxcontent}
+			\rule{\titleboxwidth}{\fboxrule}
+		}
+		\end{flushleft}
+	}
+	\parbox{\fboxrule}{\rule{\fboxrule}{\titleboxheight}}
+}

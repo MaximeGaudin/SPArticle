@@ -3,14 +3,24 @@
 	\fontfamily{pag}
 	\fontseries{bc}
 	\fontshape{bf}
+	\fontsize{22}{20}
 	\selectfont}
+
+\newcommand{\chaptertitlefont}{
+	\fontencoding{\encodingdefault}
+	\fontfamily{pag}
+	\fontseries{bc}
+	\fontshape{bf}
+	\fontsize{32}{30}
+	\selectfont}
+
 
 \newcommand{\chapternumfont}{
 	\fontencoding{\encodingdefault}
 	\fontfamily{pag}
 	\fontseries{bc}
 	\fontshape{bf}
-	\fontsize{32}{30}
+	\fontsize{72}{70}
 	\selectfont
 }
 
@@ -42,14 +52,22 @@
 
 % Document
 \renewcommand{\@makechapterhead}[1]{% 
-		% Numéro de chapitre
-		{\chapternumfont\thechapter}%
-		% Titre du chapitre
-		\hfill{\huge\chapterfont#1}%  
+	\begin{minipage}[t]{\linewidth}
+		\begin{minipage}[t]{0.65\linewidth}
+			% Numéro de chapitre
+			{\flushleft\minitoc}%
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t][3cm][t]{0.25\linewidth}
+			{\chapterfont Chapitre}\\~\\%
+			{\chapternumfont\thechapter}%
+		\end{minipage}
+	\end{minipage}
 
+	% Titre du chapitre
 	\vspace*{1cm}
-		\par\minitoc
-	\vspace*{1cm}
+	\begin{center}\chaptertitlefont#1\end{center} 
+	\vspace*{2cm}
 }
 
 % Table des matières

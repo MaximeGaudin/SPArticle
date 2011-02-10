@@ -53,14 +53,15 @@
 % Document
 \renewcommand{\@makechapterhead}[1]{% 
 	\begin{minipage}[t]{\linewidth}
-		\begin{minipage}[t]{0.65\linewidth}
+		\fbox{\begin{minipage}[t]{0.65\linewidth}
 			% Numéro de chapitre
 			{\flushleft\minitoc}%
-		\end{minipage}
+		\end{minipage}}
 		\hfill
 		\begin{minipage}[t][3cm][t]{0.25\linewidth}
-			{\chapterfont Chapitre}\\~\\%
-			{\chapternumfont\thechapter}%
+			{\flushright\chapterfont Chapitre}
+			\vspace*{-.2cm}
+			\begin{center}\chapternumfont\thechapter\end{center}%
 		\end{minipage}
 	\end{minipage}
 

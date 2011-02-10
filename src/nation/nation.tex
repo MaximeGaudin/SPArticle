@@ -8,8 +8,8 @@
 
 %% Sectioning improvement
 \input{nation/customPart}
-\input{nation/customSection}
 \input{nation/customChapter}
+\input{nation/customSection}
 
 %%%% Commandes 
 \newcommand{\nHeader}[3][Maxime \textsc{Gaudin}]
@@ -21,11 +21,7 @@
 	\cfoot{\thepage\ / \pageref{LastPage}}
 }
 
-\newcommand{\nSignature}[1]
-{
-	\flushright{\small\sl #1}
-}
-
+\newcommand{\nSignature}[1] { \flushright{\small\sl #1} }
 
 %% Indentation correction
 \newcommand{\nInd}[0]
@@ -76,7 +72,8 @@
 
 
 %% Extras
-\newcommand{\nImage}[3] 
+% \image{Chemin}{Titre de la figure}{Proportion par rapport à la largeur de la page}
+\newcommand{\image}[3] 
 {
 \begin{figure}[H]
 \centering
@@ -85,7 +82,8 @@
 \end{figure}
 }
 
-\newcommand{\nCode}[2]
+% \code{Nom du fichier}{Chemin du fichier}
+\newcommand{\code}[2]
 {
 	\paragraph{#1}~\\
 	\lstinputlisting{#2}

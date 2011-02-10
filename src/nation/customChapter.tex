@@ -55,12 +55,17 @@
 % Document
 \renewcommand{\@makechapterhead}[1]{% 
 	\begin{minipage}[t]{\linewidth}
-		\fbox{\begin{minipage}[t]{0.65\linewidth}
-			% Numéro de chapitre
-			{\flushleft\minitoc}%
-		\end{minipage}}
+		\titlebox{\mtctitle}
+		{
+			\hspace*{-1cm}
+			\begin{minipage}[t]{0.65\linewidth}
+				% Numéro de chapitre
+				{\minitoc[n]}%
+			\end{minipage}
+		}
 		\hfill
 		\begin{minipage}[t][3cm][t]{0.25\linewidth}
+			\vspace*{-2cm}
 			{\flushright\chapterfont Chapitre}
 			\vspace*{-.2cm}
 			\begin{center}\chapternumfont\thechapter\end{center}%
@@ -70,7 +75,7 @@
 	% Titre du chapitre
 	\vspace*{1cm}
 	\begin{center}\chaptertitlefont#1\end{center} 
-	\vspace*{2cm}
+	\vspace*{2.5cm}
 }
 
 % Table des matières

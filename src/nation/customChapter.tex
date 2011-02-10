@@ -1,5 +1,18 @@
-\DeclareFixedFont{\chapnumfont}{T1}{phv}{bc}{n}{80}
-\DeclareFixedFont{\chapfont}{T1}{phv}{b}{n}{24.88pt}
+\newcommand{\chapterfont}{
+	\fontencoding{\encodingdefault}
+	\fontfamily{pag}
+	\fontseries{bc}
+	\fontshape{bf}
+	\selectfont}
+
+\newcommand{\chapternumfont}{
+	\fontencoding{\encodingdefault}
+	\fontfamily{pag}
+	\fontseries{bc}
+	\fontshape{bf}
+	\fontsize{32}{30}
+	\selectfont
+}
 
 \newcounter{chapitre}
 \setcounter{chapitre}{1}
@@ -13,28 +26,36 @@
 	\@afterindentfalse
 	\secdef\@chapter\@schapter}
 
-	\newenvironment{cadrechap}
-	{\begin{list}{}{%
+\newenvironment{cadrechap}
+{
+	\begin{list}{}{%
 		\setlength{\leftmargin}{0pt}%
 		\setlength{\rightmargin}{0cm}%
 		\setlength{\itemindent}{0pt}%
 		\setlength{\labelsep}{0pt}%
-	}\item}{\end{list}
+	}
+	\item
+}
+{
+	\end{list}
 }
 
+% Document
 \renewcommand{\@makechapterhead}[1]{% 
-	\begin{cadrechap}
-		\if@mainmatter{\chapnumfont\thechapter}\else\mbox{}\fi
-		\hfill{\chapfont#1}%  
-	\end{cadrechap}%
+		% Numéro de chapitre
+		{\chapternumfont\thechapter}%
+		% Titre du chapitre
+		\hfill{\huge\chapterfont#1}%  
+
 	\vspace*{1cm}
-	\par\ifx\minitoc\undefined\else\minitoc\fi
+		\par\minitoc
 	\vspace*{1cm}
 }
 
+% Table des matières
 \renewcommand{\@makeschapterhead}[1]{%   
 	\begin{cadrechap}
-		\mbox{}\hfill{\chapfont#1}
+		\mbox{}\hfill{\bf\huge#1}
 	\end{cadrechap}%
 	\vspace{2cm}\par
 }

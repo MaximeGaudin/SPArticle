@@ -3,6 +3,9 @@
 \newlength{\parindentCopy}
 \setlength{\parindentCopy}{\parindent}
 
+%% New title page
+\input{nation/customTitle.tex}
+
 %% Page numbering
 \input{nation/customOnglets}
 
@@ -12,12 +15,16 @@
 \input{nation/customSection}
 
 %%%% Commandes 
-\newcommand{\nHeader}[3][Maxime \textsc{Gaudin}]
+\newcommand{\nHeader}[5][null]
 {
-	\title{\Huge\bf #2}
-	\author{#1}
+	\renewcommand{\title}{#2}
+	\newcommand{\subtitle}{#3}
+	\renewcommand{\author}{#5}
 
-	\lhead{#3}
+	\ifthenelse{\equal{#1}{null}}{}
+	{\newcommand{\documenttitle}{#1}}
+
+	\lhead{#4}
 	\cfoot{\thepage\ / \pageref{LastPage}}
 }
 

@@ -1,5 +1,5 @@
 # Makefile for Nation Template
-# DigitalGuru
+# Designed by DigitalGuru
 BIN_DIRECTORY=bin/
 TMP_DIRECTORY=tmp/
 SRC_DIRECTORY=src/

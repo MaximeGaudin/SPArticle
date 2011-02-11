@@ -9,34 +9,38 @@
 \newcommand{\subtitlefont}{\sl\Large}
 
 \newlength{\titlehruleheight}
-\setlength{\titlehruleheight}{0.4mm}
+\setlength{\titlehruleheight}{0.3mm}
 
 \newlength{\titlespace}
-\setlength{\titlespace}{0.7cm}
+\setlength{\titlespace}{0.5cm}
 
 \renewcommand{\maketitle}
 {
 	\begin{titlepage}
 	\centering
 
+	\vspace*{5cm}
 	\begin{minipage}{0.8\linewidth}
 		\centering
-		\ifthenelse{\isundefined{\documentlogo}} {}
-		{\image{\documentlogo}{0.4}}
-		\vspace*{3cm}
-
 			\hrule height \titlehruleheight
 		\vspace*{\titlespace}
+
 			{\titlefont\title}~\\
 		\vspace*{\titlespace}
+
 			\hrule height \titlehruleheight
 			~\\{\subtitlefont\subtitle}~\\
 		\vspace*{\titlespace}
-			\textsl{\textbf{Auteurs}\\ \author}
-	\end{minipage}
 
+			\textsl{\textbf{Auteurs}\\ \author}
+		\vspace*{2cm}
+
+		\ifthenelse{\isundefined{\documentlogo}} {}
+		{\image{\documentlogo}{0.4}}
+	\end{minipage}
+	
 	\vfill
-	{\large \today}
+	{\bf\large \today}
 	\end{titlepage}
 }
 

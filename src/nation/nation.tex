@@ -73,12 +73,12 @@
 
 %% Extras
 % \image[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}
-\newcommand{\image}[3] 
+\newcommand{\image}[3][null] 
 {
 \begin{figure}[H]
 \centering
 	\includegraphics[keepaspectratio=true, width=#3\textwidth]{#2}
-	\ifthenelse{\equal{#1}{null}
+	\ifthenelse{\equal{#1}{null}}
 	{}
 	{\caption{#1}}
 \end{figure}

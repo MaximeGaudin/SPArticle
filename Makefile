@@ -37,12 +37,15 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	fi
 
 convert_images:
-	cd ${IMG_DIRECTORY} && \
+	@cd ${IMG_DIRECTORY} && \
 	for i in `ls`; do \
 		fn=$${i%%.*}; \
 		ext=`echo $${i#*.} | tr '[A-Z]' '[a-z]'`; \
 		if [[ "$$ext" != "png" && "$$ext" != "jpg" && "$$ext" != "pdf" ]]; then \
-			convert $$i $$fn.png; \
+			if [[ ! -e $$fn.png ]]; then \
+				echo "Conversion..."; \
+				convert $$i $$fn.png; \
+			fi; \
 		fi; \
 	done
 

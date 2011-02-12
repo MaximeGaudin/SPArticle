@@ -27,7 +27,9 @@ all: clean check_directory convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf
 
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@compile=${COMPILE_SUCCESS}; \
-	cd ${SRC_DIRECTORY} && pdflatex -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+	cd ${SRC_DIRECTORY} && \
+	pdflatex -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+	pdflatex -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
 	if [[ $${compile} -eq ${COMPILE_SUCCESS} ]]; then \
 		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \

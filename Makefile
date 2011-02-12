@@ -19,10 +19,11 @@ STDOUT_ERROR_FILENAME=errors.log
 BIN_DIRECTORY=bin/
 TMP_DIRECTORY=tmp/
 SRC_DIRECTORY=src/
+IMG_DIRECTORY=img/
 
 INPUT_FILENAME=main
 
-all: clean check_directory ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf 
+all: clean check_directory convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf 
 
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@compile=${COMPILE_SUCCESS}; \
@@ -34,6 +35,16 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 		echo ${ROUGE} "Echec de la compilation !" ${NORMAL}; \
 		cat ../${TMP_DIRECTORY}${INPUT_FILENAME}.log; \
 	fi
+
+convert_images:
+	cd ${IMG_DIRECTORY} && \
+	for i in `ls`; do \
+		fn=$${i%%.*}; \
+		ext=`echo $${i#*.} | tr '[A-Z]' '[a-z]'`; \
+		if [[ "$$ext" != "png" && "$$ext" != "jpg" && "$$ext" != "pdf" ]]; then \
+			convert $$i $$fn.png; \
+		fi; \
+	done
 
 check_directory:
 	@if [ ! -d ${BIN_DIRECTORY} ]; then mkdir ${BIN_DIRECTORY}; fi

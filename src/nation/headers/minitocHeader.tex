@@ -1,3 +1,7 @@
-\dominitoc
-\nomtcrule
-\setcounter{minitocdepth}{1}
+\ifthenelse{\equal{\nationclass}{book}}
+{
+	\dominitoc
+	\nomtcrule
+	\setcounter{minitocdepth}{1}
+}
+{}

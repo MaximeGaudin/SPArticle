@@ -30,6 +30,8 @@
 \input{nation/customBox}
 
 \makeatletter
+\ifthenelse{\equal{\nationclass}{book}}
+{
 \renewcommand{\chapter}{%
 	\cleardoublepage
 	\stepcounter{chapitre}
@@ -85,4 +87,6 @@
 	\end{cadrechap}%
 	\vspace{2cm}\par
 }
+}
+{}
 \makeatother

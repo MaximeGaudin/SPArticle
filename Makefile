@@ -1,6 +1,10 @@
-#!/bin/bash
+#####################
+## CHANGE FILENAME ##
+OUTPUT_FILENAME=MAIN
+#####################
 # Makefile for Nation Template
 # Designed by DigitalGuru
+
 VERT="\\033[1;32m"
 ROUGE="\\033[1;31m"
 NORMAL="\\033[0;39m"
@@ -17,11 +21,6 @@ TMP_DIRECTORY=tmp/
 SRC_DIRECTORY=src/
 
 INPUT_FILENAME=main
-
-#####################
-## CHANGE FILENAME ##
-OUTPUT_FILENAME=MAIN
-#####################
 
 all: clean check_directory ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf 
 

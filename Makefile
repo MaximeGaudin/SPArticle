@@ -43,10 +43,15 @@ convert_images:
 	for i in `ls`; do \
 		fn=$${i%%.*}; \
 		ext=`echo $${i#*.} | tr '[A-Z]' '[a-z]'`; \
-		if [[ "$$ext" != "png" && "$$ext" != "jpg" && "$$ext" != "pdf" ]]; then \
-			if [[ ! -e $$fn.png ]]; then \
-				echo "Conversion..."; \
-				convert $$i $$fn.png; \
+		if [[ "$$ext" == "dot" ]]; then \
+			echo "Export...";\
+			dot -Tpng -o $$fn.png $$i; \
+		else \
+			if [[ "$$ext" != "png" && "$$ext" != "jpg" && "$$ext" != "pdf" ]]; then \
+				if [[ ! -e $$fn.png ]]; then \
+					echo "Conversion..."; \
+					convert $$i $$fn.png; \
+				fi; \
 			fi; \
 		fi; \
 	done

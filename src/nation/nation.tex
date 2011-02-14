@@ -4,6 +4,8 @@
 \newlength{\parindentCopy}
 \setlength{\parindentCopy}{\parindent}
 
+\input{nation/headers/fancyHeader}
+
 %% New title page
 \input{nation/customTitle.tex}
 
@@ -22,11 +24,10 @@
 	\newcommand{\subtitle}{#3}
 	\renewcommand{\author}{#5}
 
+	\lhead{#4}
+
 	\ifthenelse{\equal{#1}{null}}{}
 	{\newcommand{\documentlogo}{#1}}
-
-	\lhead{#4}
-	\cfoot{\thepage\ / \pageref{LastPage}}
 }
 
 \newcommand{\nSignature}[1] { \flushright{\small\sl #1} }

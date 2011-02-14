@@ -5,6 +5,12 @@ OUTPUT_FILENAME=MAIN
 # Makefile for Nation Template
 # Designed by DigitalGuru
 
+CMD_PDFLATEX=pdflatex
+CMD_DOT=dot
+CMD_IMAGEMAGICK=convert
+CMD_RM=rm
+CMD_MKDIR=mkdir
+
 VERT="\\033[1;32m"
 ROUGE="\\033[1;31m"
 NORMAL="\\033[0;39m"
@@ -28,8 +34,8 @@ all: clean check_directory convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@compile=${COMPILE_SUCCESS}; \
 	cd ${SRC_DIRECTORY} && \
-	pdflatex -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
-	pdflatex -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+	${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+	${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -halt-on-error ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
 	if [[ $${compile} -eq ${COMPILE_SUCCESS} ]]; then \
 		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
@@ -45,24 +51,24 @@ convert_images:
 		ext=`echo $${i#*.} | tr '[A-Z]' '[a-z]'`; \
 		if [[ "$$ext" == "dot" ]]; then \
 			echo "Export...";\
-			dot -Tpng -o $$fn.png $$i; \
+			${CMD_DOT} -Tpng -o $$fn.png $$i; \
 		else \
 			if [[ "$$ext" != "png" && "$$ext" != "jpg" && "$$ext" != "pdf" ]]; then \
 				if [[ ! -e $$fn.png ]]; then \
 					echo "Conversion..."; \
-					convert $$i $$fn.png; \
+					${CMD_IMAGEMAGICK} $$i $$fn.png; \
 				fi; \
 			fi; \
 		fi; \
 	done
 
 check_directory:
-	@if [ ! -d ${BIN_DIRECTORY} ]; then mkdir ${BIN_DIRECTORY}; fi
-	@if [ ! -d ${TMP_DIRECTORY} ]; then mkdir ${TMP_DIRECTORY}; fi
+	@if [ ! -d ${BIN_DIRECTORY} ]; then ${CMD_MKDIR} ${BIN_DIRECTORY}; fi
+	@if [ ! -d ${TMP_DIRECTORY} ]; then ${CMD_MKDIR} ${TMP_DIRECTORY}; fi
 
 clean:
-	@rm -f bin/*
+	@${CMD_RM} -f bin/*
 
 mrproper: clean
-	@rm -rf tmp
-	@rm -rf bin
+	@${CMD_RM} -rf tmp
+	@${CMD_RM} -rf bin

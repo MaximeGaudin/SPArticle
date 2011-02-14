@@ -1,0 +1,11 @@
+\cfoot{
+	% Un petit hack pour régler un problème de LastPage
+	\setcounter{cntPage}{\value{page}}
+	\addtocounter{cntPage}{-1}
+	%
+	\ifthenelse{\not \equal{\thecntPage}{\pageref{LastPage}}}
+	{\thepage\ sur\ \pageref{LastPage}}
+	{}
+}
+
+%\cfoot{\thepage\ / \pageref{LastPage}}

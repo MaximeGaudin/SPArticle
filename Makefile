@@ -10,10 +10,12 @@ CMD_DOT=dot
 CMD_IMAGEMAGICK=convert
 CMD_RM=rm
 CMD_MKDIR=mkdir
+CMD_MAKEGLOS=makeglossaries
 
 VERT="\\033[1;32m"
 ROUGE="\\033[1;31m"
 NORMAL="\\033[0;39m"
+CYAN="\\033[1;36m"
 
 COMPILE_SUCCESS=0
 COMPILE_FAIL=1
@@ -34,9 +36,19 @@ all: clean check_directory convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@compile=${COMPILE_SUCCESS}; \
 	cd ${SRC_DIRECTORY} && \
-	${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+	echo ${CYAN} "Première passe LaTeX..." ${NORMAL}; \
+	${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
+	\
 	if [[ $${compile} -eq ${COMPILE_SUCCESS} ]]; then \
+		echo ${CYAN} "Construction du glossaire..." ${NORMAL}; \
+		cd ../${TMP_DIRECTORY} && ${CMD_MAKEGLOS} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
+		\
+		echo ${CYAN} "Deuxième passe LaTeX..." ${NORMAL}; \
 		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+		\
+		echo ${CYAN} "Troisième passe LaTeX..." ${NORMAL}; \
+		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+		\
 		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
 	else \

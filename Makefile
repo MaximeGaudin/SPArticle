@@ -11,6 +11,7 @@ CMD_IMAGEMAGICK=convert
 CMD_RM=rm
 CMD_MKDIR=mkdir
 CMD_MAKEGLOS=makeglossaries
+CMD_MAKEBIB=bibtex
 
 VERT="\\033[1;32m"
 ROUGE="\\033[1;31m"
@@ -42,6 +43,10 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	if [[ $${compile} -eq ${COMPILE_SUCCESS} ]]; then \
 		echo ${CYAN} "Construction du glossaire..." ${NORMAL}; \
 		cd ../${TMP_DIRECTORY} && ${CMD_MAKEGLOS} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
+		\
+		echo ${CYAN} "Construction de la bibliographie..." ${NORMAL}; \
+		cp *.bib ../${TMP_DIRECTORY}; \
+		cd ../${TMP_DIRECTORY} && ${CMD_MAKEBIB} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
 		\
 		echo ${CYAN} "Deuxième passe LaTeX..." ${NORMAL}; \
 		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \

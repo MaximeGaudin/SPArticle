@@ -19,7 +19,9 @@
 	\selectfont
 }
 
-\fancyhead[RO]{\boiteonglet}
+\ifthenelse{\equal{\nationclass}{book}}
+	{\fancyhead[RO]{\boiteonglet}}
+	{}
 
 \newcommand{\boiteonglet}{% 
 	\raisebox{-13cm}[0pt][0pt]{

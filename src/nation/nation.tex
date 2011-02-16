@@ -1,16 +1,12 @@
-% À commenter
-\input{nation/headers/texHeader}
-\input{nation/headers/fancyHeader}
-
 \newlength{\parindentCopy}
 \setlength{\parindentCopy}{\parindent}
 
-\input{nation/abbreviations}
+\input{nation/headers/texHeader}
 
 %% New title page
 \input{nation/customTitle.tex}
 
-%% Page numbering
+%% Page numbering for books
 \input{nation/customOnglets}
 
 %% New glossary style
@@ -43,15 +39,6 @@
 	\hspace*{0.8\parindent}
 }
 
-%%%% Environnements
-\newenvironment{nVCenter}
-{
-	\vspace*{\fill}
-}
-{
-	\vspace*{\fill}
-}
-
 \newenvironment{nNoIndent}
 {
 	\setlength{\parindent}{0pt}
@@ -59,19 +46,6 @@
 {
 	\setlength{\parindent}{\parindentCopy}
 }
-
-\newenvironment{nAbstract}		
-{								
-	\begin{nVCenter}
-		\begin{center}				
-			\begin{abstract}		
-}
-{
-			\end{abstract}			
-		\end{center}				
-	\end{nVCenter}
-}
-
 
 %% Extras
 % \image[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}
@@ -92,7 +66,7 @@
 \end{figure}
 }
 
-% \image[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}{r ou l} 
+% \wrappedimage[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}{r ou l} 
 \newcommand{\wrappedimage}[4][null] 
 {
 \begin{wrapfigure}{#4}{#3\textwidth}
@@ -118,19 +92,4 @@
 \newcommand{\nLettrine}[2]{ 
 	\renewcommand{\LettrineFontHook}{\color[gray]{0.5}}
 	\lettrine[lines=1]{#1}{#2}
-}
-
-%% Extras like bibliography & Index
-\newcommand{\nBibliography}[0] 
-{
-	\begin{nVCenter}
-	\bibliography{references}
-	\end{nVCenter}
-}
-
-\newcommand{\nIndex}[0] 
-{
-	\begin{nVCenter}
-	\printindex
-	\end{nVCenter}
 }

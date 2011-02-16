@@ -37,17 +37,6 @@
 \newcommand{\nSignature}[1] { \flushright{\small\sl #1} }
 
 %% Indentation correction
-\newcommand{\nInd}[0]
-{
-
-
-}
-
-\newcommand{\nUnindent}[0]
-{
-	\hspace*{-1.2\parindent}
-}
-
 \newcommand{\nPar}[0]
 {
 	~\\
@@ -86,6 +75,8 @@
 
 %% Extras
 % \image[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}
+\newcounter{cntFigure}
+\setcounter{cntFigure}{1}
 \newcommand{\image}[3][null] 
 {
 \begin{figure}[H]
@@ -93,8 +84,28 @@
 	\includegraphics[keepaspectratio=true, width=#3\textwidth]{#2}
 	\ifthenelse{\equal{#1}{null}}
 	{}
-	{\caption{#1}}
+	{
+		\caption{#1}
+		\label{fig\thecntFigure}
+		\stepcounter{cntFigure}
+	}
 \end{figure}
+}
+
+% \image[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}{r ou l} 
+\newcommand{\wrappedimage}[4][null] 
+{
+\begin{wrapfigure}{#4}{#3\textwidth}
+\centering
+	\includegraphics[keepaspectratio=true, width=#3\textwidth]{#2}
+	\ifthenelse{\equal{#1}{null}}
+	{}
+	{
+		\caption{#1}
+		\label{fig\thecntFigure}
+		\stepcounter{cntFigure}
+	}
+\end{wrapfigure}
 }
 
 % \code{Nom du fichier}{Chemin du fichier}

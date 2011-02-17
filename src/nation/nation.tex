@@ -7,14 +7,14 @@
 \input{nation/customTitle.tex}
 
 %% Page numbering for books
-\input{nation/customOnglets}
+%\input{nation/customOnglets}
 
 %% New glossary style
 \input{nation/customGlossary}
 
 %% Sectioning improvement
 \input{nation/customPart}
-\input{nation/customChapter}
+%\input{nation/customChapter}
 \input{nation/customSection}
 
 %%%% Commandes 
@@ -22,12 +22,13 @@
 {
 	\renewcommand{\title}{#2}
 	\newcommand{\subtitle}{#3}
+	\newcommand{\shorttitle}{#4}
 	\renewcommand{\author}{#5}
-
-	\lhead{#4}
 
 	\ifthenelse{\equal{#1}{null}}{}
 	{\newcommand{\documentlogo}{#1}}
+
+	\input{nation/headers/fancyHeader}
 }
 
 \newcommand{\nSignature}[1] { \flushright{\small\sl #1} }

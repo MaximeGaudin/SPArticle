@@ -20,4 +20,3 @@ if [ $COMPILE = 1 ]; then
 fi
 
 # Actions pre-commit
-echo ""

@@ -32,7 +32,7 @@ IMG_DIRECTORY=img/
 
 INPUT_FILENAME=main
 
-all: clean check_directory convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf 
+all: clean check_directory check_git convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf 
 
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@compile=${COMPILE_SUCCESS}; \
@@ -78,6 +78,9 @@ convert_images:
 			fi; \
 		fi; \
 	done
+
+check_git:
+	@if [ -d .git ]; then cp versioning/pre-commit .git/hooks/; fi
 
 check_directory:
 	@if [ ! -d ${BIN_DIRECTORY} ]; then ${CMD_MKDIR} ${BIN_DIRECTORY}; fi

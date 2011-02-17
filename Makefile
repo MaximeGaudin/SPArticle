@@ -80,7 +80,7 @@ convert_images:
 	done
 
 check_git:
-	@if [ -d .git ]; then cp versioning/pre-commit .git/hooks/; fi
+	@if [ -d .git ]; then cp versioning/pre-commit .git/hooks/; chmod 774 .git/hooks/pre-commit; fi
 
 check_directory:
 	@if [ ! -d ${BIN_DIRECTORY} ]; then ${CMD_MKDIR} ${BIN_DIRECTORY}; fi

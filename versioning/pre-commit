@@ -12,6 +12,7 @@ CYAN="\\033[1;36m"
 COMPILE=0
 make || COMPILE=1
 
+echo "$BLEU" "---- GIT COMMIT ----" "$NORMAL"
 if [ $COMPILE = 1 ]; then
         echo "\n"
         echo "$ROUGE" "Echec de la compilation : commit interdit !" "$NORMAL"

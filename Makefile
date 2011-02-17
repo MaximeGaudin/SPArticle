@@ -59,6 +59,7 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	else \
 		cat ../${TMP_DIRECTORY}${INPUT_FILENAME}.log; \
 		echo ${ROUGE} "Echec de la compilation :" ${NORMAL} `grep -E '^!' ../tmp/main.log`;\
+		exit 1; \
 	fi
 
 convert_images:

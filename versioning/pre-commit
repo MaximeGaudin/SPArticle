@@ -15,12 +15,9 @@ make || COMPILE=1
 echo ""
 echo "$BLEU" "---- GIT COMMIT ----" "$NORMAL"
 if [ $COMPILE = 1 ]; then
-        echo "\n"
-        echo "$ROUGE" "Echec de la compilation : commit interdit !" "$NORMAL"
+        echo "$ROUGE" "Il est interdit de commiter des sources non compilables !" "$NORMAL"
         exit 1
 fi
-
-echo "$VERT" "Compilation : OK" "$NORMAL"
 
 # Actions pre-commit
 echo ""

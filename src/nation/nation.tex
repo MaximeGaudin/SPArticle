@@ -84,10 +84,10 @@
 }
 
 % \code{Nom du fichier}{Chemin du fichier}
-\newcommand{\code}[2]
+\newcommand{\code}[3][c++]
 {
-	\paragraph{#1}~\\
-	\lstinputlisting{#2}
+	{\centering\paragraph{#2}}
+	\lstinputlisting[language=#1]{#3}
 }
 
 \newcommand{\nLettrine}[2]{ 

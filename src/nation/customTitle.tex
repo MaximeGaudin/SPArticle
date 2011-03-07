@@ -1,3 +1,5 @@
+\newdateformat{veryshortdate}{\monthname[\THEMONTH] \THEYEAR}
+
 \ifthenelse{\equal{\nationclass}{book}}
 {
 % Book
@@ -43,13 +45,12 @@
 		\end{minipage}
 		
 		\vfill
-		{\bf\large \today}
+		{\bf\large \veryshortdate\today}
 		\end{titlepage}
 	}
 }
 {
 % Article
-	\newdateformat{veryshortdate}{\monthname[\THEMONTH] \THEYEAR}
 	\newcommand{\titlefont}{
 	\fontencoding{\encodingdefault}
 	\fontfamily{pag}

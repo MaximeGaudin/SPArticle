@@ -49,10 +49,10 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 		cd ../${TMP_DIRECTORY} && ${CMD_MAKEBIB} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
 		\
 		echo ${CYAN} "Deuxième passe LaTeX..." ${NORMAL}; \
-		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
 		\
 		echo ${CYAN} "Troisième passe LaTeX..." ${NORMAL}; \
-		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 !>/dev/null || compile=${COMPILE_FAIL}; \
+		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
 		\
 		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \

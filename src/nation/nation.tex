@@ -49,6 +49,27 @@
 }
 
 %% Extras
+\newcommand{\gfont}{
+	\fontencoding{\encodingdefault}
+	\fontfamily{ptm}
+	\fontseries{bc}
+	\fontshape{bf}
+	\fontsize{65}{60}
+	\selectfont}
+
+\renewcommand{\citation}[2][null]
+{
+	~\\~\\
+\begin{minipage}{\textwidth}
+	\parbox{0.2\textwidth} {\textcolor[rgb]{0.5,0.5,0.5}{\gfont "}} 
+		\parbox{0.8\textwidth}
+	{   
+		\textcolor[rgb]{0.3, 0.3, 0.3}{\textsl{#2}}
+		\ifthenelse{\equal{#1}{null}}{}{\begin{flushright}\textsc{#1}\end{flushright}}
+	}   
+\end{minipage}
+}
+
 % \image[Titre de l'image]{Chemin}{Proportion par rapport à la largeur de la page}
 \newcounter{cntFigure}
 \setcounter{cntFigure}{1}

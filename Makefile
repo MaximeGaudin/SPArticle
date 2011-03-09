@@ -39,7 +39,6 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	cd ${SRC_DIRECTORY} && \
 	echo ${CYAN} "Première passe LaTeX..." ${NORMAL}; \
 	${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
-	\
 	if [[ $${compile} -eq ${COMPILE_SUCCESS} ]]; then \
 		echo ${CYAN} "Construction du glossaire..." ${NORMAL}; \
 		cd ../${TMP_DIRECTORY} && ${CMD_MAKEGLOS} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
@@ -51,8 +50,20 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 		echo ${CYAN} "Deuxième passe LaTeX..." ${NORMAL}; \
 		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
 		\
-		echo ${CYAN} "Troisième passe LaTeX..." ${NORMAL}; \
-		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
+		echo ${CYAN} "Passe finale LaTeX..." ${NORMAL}; \
+		end=0; \
+		while [ $${end} == 0 ]; do \
+			echo ${CYAN} "." ${NORMAL}; \
+			${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
+			if [[ -e current.sig ]]; then \
+				LAST_SHA_HASH=`cat current.sig`; \
+				if [[ $${LAST_SHA_HASH} == $${CURRENT_SHA_HASH} ]]; then \
+					end=1; \
+				fi; \
+			fi; \
+			echo $${CURRENT_SHA_HASH} > current.sig; \
+			CURRENT_SHA_HASH=`shasum ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf|sed 's/ \.\.\/${TMP_DIRECTORY}${INPUT_FILENAME}.pdf/g'`; \
+		done; \
 		\
 		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
@@ -60,7 +71,7 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 		cat ../${TMP_DIRECTORY}${INPUT_FILENAME}.log; \
 		echo ${ROUGE} "Echec de la compilation :" ${NORMAL} `grep -E '^!' ../tmp/main.log`;\
 		exit 1; \
-	fi
+	fi;
 
 convert_images:
 	@cd ${IMG_DIRECTORY} && \

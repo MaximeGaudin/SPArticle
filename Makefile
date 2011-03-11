@@ -1,6 +1,7 @@
+#!/bin/zsh
 #####################
 ## CHANGE FILENAME ##
-OUTPUT_FILENAME=MAIN
+OUTPUT_FILENAME=BLOCH_GAUDIN_Datamining
 #####################
 # Makefile for Nation Template
 # Designed by DigitalGuru
@@ -38,21 +39,25 @@ all: clean check_directory check_git convert_images ${BIN_DIRECTORY}${OUTPUT_FIL
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@COMPILE=0; \
 	echo ${CYAN} "Compilation ..." ${NORMAL}; \
-	cd src && latexmk -r ../latexmk/latexmkrc -bibtex -f- -pdf -silent main.tex > /dev/null || COMPILE=1; \
+	cd src && latexmk -r ../latexmk/latexmkrc -f- -pdf -silent main.tex > /dev/null || COMPILE=1; \
 	echo ${CYAN} "Cleanup latexmk mess..." ${NORMAL}; \
 	cd ../; \
-	EXT=aux && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=glo && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=ist && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=maf && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=mtc && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=mtc0 && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=log && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=acn && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=idx && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=out && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=fdb_latexmk && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;	\
-	if [[ $${COMPILE} == 1 ]]; then \
+	EXT=aux && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=glo && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=ist && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=maf && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=mtc && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=mtc0 && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=log && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=acn && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=idx && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=out && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=ilg && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=ind && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=toc && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=fdb_latexmk && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;	\
+	if [ -e ${SRC_DIRECTORY}*.bak ]; then rm ${SRC_DIRECTORY}*.bak; fi; \
+	if [ $${COMPILE} = 1 ]; then \
 		echo ${ROUGE} "La compilation a échouée ! " ${NORMAL}; \
 		grep -E -A6 "^\!" ${TMP_DIRECTORY}${INPUT_FILENAME}.log; \
 	else \
@@ -66,12 +71,12 @@ convert_images:
 	for i in `ls`; do \
 		fn=$${i%%.*}; \
 		ext=`echo $${i#*.} | tr '[A-Z]' '[a-z]'`; \
-		if [[ "$$ext" == "dot" ]]; then \
+		if [ "$$ext" = 'dot' ]; then \
 			echo "Export...";\
 			${CMD_DOT} -Tpng -o $$fn.png $$i; \
 		else \
-			if [[ "$$ext" != "png" && "$$ext" != "jpg" && "$$ext" != "pdf" ]]; then \
-				if [[ ! -e $$fn.png ]]; then \
+			if [ "$$ext" != "png" ] && [ "$$ext" != "jpg" ] && [ "$$ext" != "pdf" ]; then \
+				if [ ! -e $$fn.png ]; then \
 					echo "Conversion..."; \
 					${CMD_IMAGEMAGICK} $$i $$fn.png; \
 				fi; \

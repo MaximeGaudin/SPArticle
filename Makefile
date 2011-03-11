@@ -12,6 +12,7 @@ CMD_RM=rm
 CMD_MKDIR=mkdir
 CMD_MAKEGLOS=makeglossaries
 CMD_MAKEBIB=bibtex
+CMD_MV=mv
 
 VERT="\\033[1;32m"
 ROUGE="\\033[1;31m"
@@ -35,43 +36,29 @@ INPUT_FILENAME=main
 all: clean check_directory check_git convert_images ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf 
 
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
-	@compile=${COMPILE_SUCCESS}; \
-	cd ${SRC_DIRECTORY} && \
-	echo ${CYAN} "Première passe LaTeX..." ${NORMAL}; \
-	${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
-	if [[ $${compile} -eq ${COMPILE_SUCCESS} ]]; then \
-		echo ${CYAN} "Construction du glossaire..." ${NORMAL}; \
-		cd ../${TMP_DIRECTORY} && ${CMD_MAKEGLOS} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
-		\
-		echo ${CYAN} "Construction de la bibliographie..." ${NORMAL}; \
-		cp *.bib ../${TMP_DIRECTORY}; \
-		cd ../${TMP_DIRECTORY} && ${CMD_MAKEBIB} ${INPUT_FILENAME} 2>&1 1>/dev/null && cd ../${SRC_DIRECTORY}; \
-		\
-		echo ${CYAN} "Deuxième passe LaTeX..." ${NORMAL}; \
-		${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
-		\
-		echo ${CYAN} "Passe finale LaTeX..." ${NORMAL}; \
-		end=0; \
-		while [ $${end} == 0 ]; do \
-			echo ${CYAN} "." ${NORMAL}; \
-			${CMD_PDFLATEX} -output-directory ../${TMP_DIRECTORY} -interaction=nonstopmode ${INPUT_FILENAME}.tex 2>&1 1>/dev/null || compile=${COMPILE_FAIL}; \
-			if [[ -e current.sig ]]; then \
-				LAST_SHA_HASH=`cat current.sig`; \
-				if [[ $${LAST_SHA_HASH} == $${CURRENT_SHA_HASH} ]]; then \
-					end=1; \
-				fi; \
-			fi; \
-			echo $${CURRENT_SHA_HASH} > current.sig; \
-			CURRENT_SHA_HASH=`shasum ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf|sed 's/ \.\.\/${TMP_DIRECTORY}${INPUT_FILENAME}.pdf/g'`; \
-		done; \
-		\
-		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
-		mv ../${TMP_DIRECTORY}${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
+	@COMPILE=0; \
+	echo ${CYAN} "Compilation ..." ${NORMAL}; \
+	cd src && latexmk -r ../latexmk/latexmkrc -bibtex -f- -pdf -silent main.tex > /dev/null || COMPILE=1; \
+	echo ${CYAN} "Cleanup latexmk mess..." ${NORMAL}; \
+	cd ../; \
+	EXT=aux && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=glo && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=ist && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=maf && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=mtc && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=mtc0 && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=log && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=acn && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=idx && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=fdb_latexmk && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;	\
+	if [[ $${COMPILE} == 1 ]]; then \
+		echo ${ROUGE} "La compilation a échouée ! " ${NORMAL}; \
+		grep -E -A6 "^\!" ${TMP_DIRECTORY}${INPUT_FILENAME}.log; \
 	else \
-		cat ../${TMP_DIRECTORY}${INPUT_FILENAME}.log; \
-		echo ${ROUGE} "Echec de la compilation :" ${NORMAL} `grep -E '^!' ../tmp/main.log`;\
-		exit 1; \
-	fi;
+		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
+		mv ${SRC_DIRECTORY}${INPUT_FILENAME}.pdf ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
+	fi; 
+
 
 convert_images:
 	@cd ${IMG_DIRECTORY} && \

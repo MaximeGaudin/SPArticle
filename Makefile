@@ -50,6 +50,7 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	EXT=log && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
 	EXT=acn && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
 	EXT=idx && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=out && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
 	EXT=fdb_latexmk && if [[ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;	\
 	if [[ $${COMPILE} == 1 ]]; then \
 		echo ${ROUGE} "La compilation a échouée ! " ${NORMAL}; \

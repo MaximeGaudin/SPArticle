@@ -1,7 +1,7 @@
 #!/bin/zsh
 #####################
 ## CHANGE FILENAME ##
-OUTPUT_FILENAME=BLOCH_GAUDIN_Datamining
+OUTPUT_FILENAME=  # < -------------------------------------- TO CHANGE
 #####################
 # Makefile for Nation Template
 # Designed by DigitalGuru

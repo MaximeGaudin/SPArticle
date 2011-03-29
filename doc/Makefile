@@ -14,7 +14,6 @@ CMD_MKDIR=mkdir
 CMD_MAKEGLOS=makeglossaries
 CMD_MAKEBIB=bibtex
 CMD_MV=mv
-CMD_VIEWER=open 
 
 VERT="\\033[1;32m"
 ROUGE="\\033[1;31m"
@@ -47,7 +46,6 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	else \
 		echo ${VERT} "Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
-		${CMD_VIEWER} ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
 	fi; 
 
 check_git:

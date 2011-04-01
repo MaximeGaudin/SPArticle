@@ -1,1 +1,39 @@
+<<<<<<< HEAD
 .DS_STORE
+=======
+# Latex files
+
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+
+*.swp
+*~
+
+# Mac finder files and hidden folders
+.DS_Store
+
+# Unecessary dirs
+tmp/*
+bin/*
+>>>>>>> e07ab51201db4ffda2f8159f3eccec156d80f172

@@ -29,7 +29,7 @@ check_directory:
 	@if [ ! -d ${BIN_DIRECTORY} ]; then ${CMD_MKDIR} ${BIN_DIRECTORY}; fi
 	@if [ ! -d ${TMP_DIRECTORY} ]; then ${CMD_MKDIR} ${TMP_DIRECTORY}; fi
 
-clean:
+clean: clean_latexmk_files
 	@${CMD_RM} -f ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf
 
 mrproper: clean

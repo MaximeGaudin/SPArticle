@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/bash
 declare -a programs=( "rm" "mkdir" "mv" "pdflatex" "bibtex" "perl" "latexmk" "dot" "convert" );
 
 BUILD_DIRECTORY=build/
@@ -18,12 +18,16 @@ write_configuration () {
 }
 
 set_configuration() {
-	if [ ! find_program "dot" ] || [ ! find_program "convert" ]; then
-		echo "IMAGE_CONVERSION=DISABLED" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
+	if [ `find_program "dot"` ]; then
+		if [ `find_program "convert"` ]; then
+			echo "IMAGE_CONVERSION=ENABLED" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
+			write_configuration "dot" "CMD_DOT"
+			write_configuration "convert" "CMD_CONVERT"
+		else
+			echo "IMAGE_CONVERSION=DISABLED" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
+		fi
 	else
-		echo "IMAGE_CONVERSION=ENABLED" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
-		write_configuration "dot" "CMD_DOT"
-		write_configuration "convert" "CMD_CONVERT"
+		echo "IMAGE_CONVERSION=DISABLED" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
 	fi
 
 	write_configuration "rm" "CMD_RM"
@@ -54,12 +58,12 @@ check_programs() {
 		name=${programs[$i]};
 	
 		if find_program "$name"; then
-			echo "${HEADER}Checking $name...\t\t\t${VERT}[OK]${NORMAL}"
+			echo "${HEADER}Checking $name...${VERT}[OK]${NORMAL}"
 		else
 			if [ ${name} == "dot" ]; then
-				echo "${HEADER}${ROUGE}Checking $name...\t\t\tNot found : image conversion disabled !${NORMAL}"
+				echo "${HEADER}${ROUGE}Checking $name...Not found : image conversion disabled !${NORMAL}"
 			else
-				echo "${HEADER}${ROUGE}Checking $name...\t\t\tNot found !${NORMAL}"
+				echo "${HEADER}${ROUGE}Checking $name...Not found !${NORMAL}"
 				exit 1
 			fi
 		fi

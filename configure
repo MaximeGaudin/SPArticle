@@ -80,6 +80,12 @@ if [ ! $1 ]; then
 	exit 1
 fi
 
+if [ $2 ]; then
+	echo "PDF_COMPILER=$2" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
+else
+	echo "PDF_COMPILER=pdflatex" >> ${BUILD_DIRECTORY}${CONFIGURATION_FILE}
+fi
+
 check_programs
 set_configuration $1
 cat ${BUILD_DIRECTORY}${GLOBAL_FILE} >> Makefile

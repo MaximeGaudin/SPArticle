@@ -11,42 +11,7 @@
 
 \begin{document}
 \maketitle
-
-\begin{abstract}
-test
-\end{abstract}
-
 \tableofcontents
-
-\section{Que dites-vous d'un petit algorithme ?}
-\begin{algo}[newValidation]
-	\REQUIRE $firstNodeIterator$ and $endNodeIterator$, iterators to a list of nodes
-	\REQUIRE $nextStep$, another BrowsableContent (optional)
-
-	\ENSURE True if the node has been validated, false otherwise.
-
-	\STATE Perform some validations on the node (potentially incrementing $firstNodeIterator$)
-
-	\FORALL{child node $child$}
-		\STATE Call $child.newValidation(firstNodeIterator, endNodeIterator, self)$
-	\ENDFOR
-	
-	\STATE Perform some other validations on the node (potentially incrementing $firstNodeIterator$)
-	\IF{each validation was successful}
-		\IF{$nextStep$ is a parameter}
-			\RETURN $nextStep.continueValidation(firstNodeIterator)$
-		\ELSE
-			\IF{$firstNodeIterator$ has reached the end of the list}
-				\RETURN \TRUE
-			\ELSE
-				\RETURN \FALSE
-			\ENDIF
-		\ENDIF
-
-	\ELSE
-		\RETURN \FALSE
-	\ENDIF
-\end{algo}
 
 %\printglossaries
 %\bibliography{references}

@@ -1,4 +1,3 @@
-#!/bin/zsh
 include build/Makefile.conf
 include build/style.conf
 
@@ -11,7 +10,7 @@ all: check_directory check_git ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf clean_late
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@COMPILE=0; \
 	echo ${CYAN} "${HEADER}Compilation ..." ${NORMAL}; \
-	cd src && latexmk -r ../${BUILD_DIRECTORY}${LATEXMKRC} -f- -pdf -pdflatex=${PDF_COMPILER} -silent main.tex &>/dev/null || COMPILE=1; \
+	cd src && latexmk -r ../${BUILD_DIRECTORY}${LATEXMKRC} -f- -pdf -pdflatex=${PDF_COMPILER} -silent main.tex || COMPILE=1; \
 	if [ $${COMPILE} = 1 ]; then \
 		echo ${ROUGE} "${HEADER}La compilation a échouée." ${NORMAL}; \
 		echo ${ROUGE} "${HEADER}Liste des erreurs :" ${NORMAL}; \
@@ -23,7 +22,15 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	fi; 
 
 check_git:
-	@if [ -d .git ]; then cp ${BUILD_DIRECTORY}/pre-commit .git/hooks/; chmod 774 .git/hooks/pre-commit; fi
+	@if [ -d .git ]; then \
+		cp ${BUILD_DIRECTORY}/pre-commit .git/hooks/; chmod 774 .git/hooks/pre-commit; \
+		if [ ! -e .gitignore ]; then \
+			echo ".DS_STORE" >> .gitignore; \
+			echo "Makefile" >> .gitignore; \
+			echo "*.pdf" >> .gitignore; \
+			cat ${BUILD_DIRECTORY}ext.conf >> .gitignore; \
+		fi; \
+	fi
 
 check_directory:
 	@if [ ! -d ${BIN_DIRECTORY} ]; then ${CMD_MKDIR} ${BIN_DIRECTORY}; fi

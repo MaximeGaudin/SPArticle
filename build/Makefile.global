@@ -15,6 +15,7 @@ ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 		echo ${ROUGE} "${HEADER}La compilation a échouée." ${NORMAL}; \
 		echo ${ROUGE} "${HEADER}Liste des erreurs :" ${NORMAL}; \
 		grep -E -A7 "^\!" ${INPUT_FILENAME}.log; \
+		exit 1; \
 	else \
 		echo ${VERT} "${HEADER}Compilation effectuée avec succès !" ${NORMAL}; \
 		mv ${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \

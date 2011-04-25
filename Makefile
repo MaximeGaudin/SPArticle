@@ -10,7 +10,7 @@ all: check_directory check_git ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf clean_late
 ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
 	@COMPILE=0; \
 	echo ${CYAN} "${HEADER}Compilation ..." ${NORMAL}; \
-	cd src && latexmk -r ../${BUILD_DIRECTORY}${LATEXMKRC} -f- -pdf -pdflatex=${PDF_COMPILER} -silent main.tex || COMPILE=1; \
+	cd src && latexmk -r ../${BUILD_DIRECTORY}${LATEXMKRC} -f- -pdf -pdflatex=${PDF_COMPILER} main.tex || COMPILE=1; \
 	if [ $${COMPILE} = 1 ]; then \
 		echo ${ROUGE} "${HEADER}La compilation a échouée." ${NORMAL}; \
 		echo ${ROUGE} "${HEADER}Liste des erreurs :" ${NORMAL}; \
@@ -62,4 +62,7 @@ clean_latexmk_files:
 	EXT=toc && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
 	EXT=bak && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
 	EXT=tns && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=bbl && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=blg && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
+	EXT=loa && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
 	EXT=fdb_latexmk && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;

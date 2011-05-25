@@ -7,7 +7,7 @@ COMPILE=${COMPILE_SUCCESS}
 
 all: check_directory check_git ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf clean_latexmk_files
 
-${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}${INPUT_FILENAME}.tex
+${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}*.tex ${SRC_DIRECTORY}*.bib 
 	@COMPILE=0; \
 	echo ${CYAN} "${HEADER}Compilation ..." ${NORMAL}; \
 	cd src && latexmk -r ../${BUILD_DIRECTORY}${LATEXMKRC} -f- -pdf -pdflatex=${PDF_COMPILER} -silent main.tex || COMPILE=1; \

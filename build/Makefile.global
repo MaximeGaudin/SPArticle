@@ -40,6 +40,7 @@ check_directory:
 
 clean: clean_latexmk_files
 	@${CMD_RM} -f ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf
+	@${CMD_RM} -f ${BIN_DIRECTORY}${OUTPUT_FILENAME}.ps
 
 mrproper: clean
 	@${CMD_RM} -f ${BIN_DIRECTORY}*.pdf
